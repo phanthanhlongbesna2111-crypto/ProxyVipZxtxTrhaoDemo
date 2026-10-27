@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0b0f">
+<title>OB55 Simulator</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px 14px;
+  background: #09090d;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 480px;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+  padding: 22px 10px;
+  border: 1px solid #ff303b;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #241015, #111116);
+}
+
+.header h1 {
+  color: #ff3946;
+  margin: 0 0 10px;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.header p {
+  color: #bbb;
+  font-size: 13px;
+  margin: 0;
+}
+
+.status {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #15151c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+#statusText {
+  color: #ff555e;
+  font-weight: bold;
+}
+
+.section-title {
+  margin: 24px 0 12px;
+  color: #ff4652;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 17px 14px;
+  margin-bottom: 10px;
+  border: 1px solid #292932;
+  border-radius: 12px;
+  background: #14141a;
+}
+
+.option h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.option p {
+  margin: 0;
+  color: #9999a5;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  background: #45454e;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 4px;
+  top: 4px;
+  border-radius: 50%;
+  background: white;
+  transition: .2s;
+}
+
+.switch input:checked + .slider {
+  background: #ff303b;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+input:focus-visible + .slider {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.button {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary {
+  background: #ff303b;
+  color: white;
+}
+
+.secondary {
+  margin-top: 10px;
+  background: #24242d;
+  color: white;
+}
+
+.notice {
+  margin-top: 18px;
+  padding: 13px;
+  background: #14141a;
+  border-radius: 10px;
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.footer {
+  text-align: center;
+  margin: 22px 0 8px;
+  color: #666;
+  font-size: 11px;
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+  <header class="header">
+    <h1>OB55 SIMULATOR</h1>
+    <p>GAMING CONTROL PANEL · DEMO VERSION</p>
+  </header>
+
+  <div class="status" aria-live="polite">
+    <span>TRẠNG THÁI MÔ PHỎNG</span>
+    <span id="statusText">ĐANG TẮT</span>
+  </div>
+
+  <h2 class="section-title">CONTROL CENTER</h2>
+
+  <div class="option">
+    <div>
+      <h3>🎯 Aim Assist</h3>
+      <p>Công tắc giao diện mô phỏng</p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" class="feature"
+        aria-label="Bật mô phỏng Aim Assist">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="option">
+    <div>
+      <h3>⚡ Performance</h3>
+      <p>Trạng thái hiệu năng giả lập</p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" class="feature"
+        aria-label="Bật mô phỏng Performance">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="option">
+    <div>
+      <h3>🎮 Custom HUD</h3>
+      <p>Công tắc giao diện HUD demo</p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" class="feature"
+        aria-label="Bật mô phỏng Custom HUD">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="option">
+    <div>
+      <h3>✨ Visual Effects</h3>
+      <p>Hiệu ứng trên website demo</p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" class="feature"
+        aria-label="Bật hiệu ứng website">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <button class="button primary" id="toggleAll">
+    BẬT TẤT CẢ
+  </button>
+
+  <button class="button secondary" id="reset">
+    ĐẶT LẠI
+  </button>
+
+  <div class="notice">
+    ⚠️ Đây là website mô phỏng giao diện.
+    Các công tắc không can thiệp Free Fire,
+    không tăng FPS thật và không thay đổi
+    khả năng ngắm trong trò chơi.
+  </div>
+
+  <footer class="footer">
+    FAN-MADE DEMO · NOT AN OFFICIAL GAME TOOL
+  </footer>
+
+</main>
+
+<script>
+const features = [...document.querySelectorAll(".feature")];
+const statusText = document.getElementById("statusText");
+const toggleAll = document.getElementById("toggleAll");
+const reset = document.getElementById("reset");
+
+function updateUI() {
+  const enabled = features.filter(item => item.checked).length;
+
+  statusText.textContent = enabled > 0
+    ? `ĐANG BẬT (${enabled}/4)`
+    : "ĐANG TẮT";
+
+  statusText.style.color = enabled > 0
+    ? "#48e58b"
+    : "#ff555e";
+
+  toggleAll.textContent = enabled === features.length
+    ? "TẮT TẤT CẢ"
+    : "BẬT TẤT CẢ";
+}
+
+features.forEach(item => {
+  item.addEventListener("change", updateUI);
+});
+
+toggleAll.addEventListener("click", () => {
+  const allEnabled = features.every(item => item.checked);
+
+  features.forEach(item => {
+    item.checked = !allEnabled;
+  });
+
+  updateUI();
+});
+
+reset.addEventListener("click", () => {
+  features.forEach(item => {
+    item.checked = false;
+  });
+
+  updateUI();
+});
+
+updateUI();
+</script>
+</body>
+</html>
